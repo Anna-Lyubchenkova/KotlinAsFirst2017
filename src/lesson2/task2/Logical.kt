@@ -39,10 +39,7 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = TODO()
 fun circleInside(x1: Double, y1: Double, r1: Double,
                  x2: Double, y2: Double, r2: Double): Boolean {
    val a = Math.sqrt(pow(x2-x1,2.0)+ pow(y2-y1,2.0))
-    if (r1<=(r2-a))
-        return true
-    else
-        return false
+    return r1<=(r2-a)
 }
 
 /**
@@ -55,14 +52,10 @@ fun circleInside(x1: Double, y1: Double, r1: Double,
  * Вернуть true, если кирпич пройдёт
  */
 fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
-    if ((a >= b && a >= c) && ((r >= b && s >= c) || (r >= c && s >= b))) {
-        return true
-    } else
-        if ((b >= a && b >= c) && ((r >= a && s >= c) || (r >= c && s >= a))) {
-            return true
-        } else
-            if ((c >= a && c >= b) && ((r >= a && s >= b) || (r >= b && s >= a))) {
-                return true
-            } else
-                return false
+    return when {
+        (((a >= b && a >= c) && ((r >= b && s >= c) || (r >= c && s >= b))) ||
+        ((b >= a && b >= c) && ((r >= a && s >= c) || (r >= c && s >= a))) ||
+        ((c >= a && c >= b) && ((r >= a && s >= b) || (r >= b && s >= a)))) -> true
+        else -> false
+    }
 }
