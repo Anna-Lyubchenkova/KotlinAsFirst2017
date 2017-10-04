@@ -2,6 +2,8 @@
 
 package lesson3.task1
 
+import java.lang.Math.*
+
 /**
  * Пример
  *
@@ -84,14 +86,35 @@ fun lcm(m: Int, n: Int): Int = TODO()
  *
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
-fun minDivisor(n: Int): Int = TODO()
+fun minDivisor(n: Int): Int {
+    var a = 2
+    var b = n
+    while (n != a) {
+        if (n % a == 0) {
+            b = a
+            break
+        } else a = a + 1
+    }
+    return b
+}
+
 
 /**
  * Простая
  *
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
-fun maxDivisor(n: Int): Int = TODO()
+fun maxDivisor(n: Int): Int {
+    var a = 2
+    var b = n
+    while (n != a) {
+        if (n % a == 0)
+            b = a
+        a = a + 1
+    }
+    if (b == n) return 1
+    else return b
+}
 
 /**
  * Простая
@@ -100,7 +123,18 @@ fun maxDivisor(n: Int): Int = TODO()
  * Взаимно простые числа не имеют общих делителей, кроме 1.
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
-fun isCoPrime(m: Int, n: Int): Boolean = TODO()
+fun isCoPrime(m: Int, n: Int): Boolean {
+    var a = m
+    var b = n
+    while (a != b) {
+        if (a >= b) a = a - b
+        else b = b - a
+    }
+    return when {
+        a == 1 -> true
+        else -> false
+    }
+}
 
 /**
  * Простая
@@ -109,8 +143,9 @@ fun isCoPrime(m: Int, n: Int): Boolean = TODO()
  * то есть, существует ли такое целое k, что m <= k*k <= n.
  * Например, для интервала 21..28 21 <= 5*5 <= 28, а для интервала 51..61 квадрата не существует.
  */
-fun squareBetweenExists(m: Int, n: Int): Boolean = TODO()
 
+
+fun squareBetweenExists(m: Int, n: Int): Boolean = TODO()
 /**
  * Средняя
  *
