@@ -89,7 +89,7 @@ fun lcm(m: Int, n: Int): Int = TODO()
 fun minDivisor(n: Int): Int {
     var a = 2
     var b = n
-    while (sqrt(n.toDouble()).toInt() >= a) {
+    for (i in 2..sqrt(n.toDouble()).toInt()) {
         if (n % a == 0) {
             b = a
             break
