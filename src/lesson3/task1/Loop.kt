@@ -112,14 +112,12 @@ fun lcm(m: Int, n: Int): Int = TODO()
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    var b = n
     for (i in 2..sqrt(n.toDouble()).toInt()) {
         if (n % i == 0) {
-            b = i
-            return b
+            return i
         }
     }
-    return b
+    return n
 }
 
 
@@ -130,7 +128,7 @@ fun minDivisor(n: Int): Int {
  */
 fun maxDivisor(n: Int): Int {
     var b = n
-    for (i in 2..n - 1) {
+    for (i in sqrt(n.toDouble()).toInt()..n - 1) {
         if (n % i == 0) {
             b = i
         }
