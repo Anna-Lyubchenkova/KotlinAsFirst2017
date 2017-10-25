@@ -253,11 +253,14 @@ fun convertToString(n: Int, base: Int): String {
     val b = convert(n, base)
     val c = 87
     var d = ""
-    for (i in 0..b.size - 1) {
-        if (b[i] > 9) d += (b[i] + c).toChar().toString()
-        else d += b[i]
+    if (n == 0) return "0"
+    else {
+        for (i in 0..b.size - 1) {
+            if (b[i] > 9) d += (b[i] + c).toChar().toString()
+            else d += b[i]
+        }
+        return d
     }
-    return d
 }
 
 /**
