@@ -213,12 +213,7 @@ fun isPalindrome(n: Int): Boolean = n == revert(n)
  * Для заданного числа n определить, содержит ли оно различающиеся цифры.
  * Например, 54 и 323 состоят из разных цифр, а 111 и 0 из одинаковых.
  */
-fun hasDifferentDigits(n: Int): Boolean {
-    var k = 0
-    if (digitCountInNumber(n, n % 10) == digitNumber(n))
-        k = 1
-    return k != 1
-}
+fun hasDifferentDigits(n: Int): Boolean = (digitCountInNumber(n, n % 10) != digitNumber(n))
 
 /**
  * Сложная
