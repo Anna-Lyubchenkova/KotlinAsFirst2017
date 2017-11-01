@@ -1,5 +1,8 @@
 @file:Suppress("UNUSED_PARAMETER")
+
 package lesson5.task1
+
+import java.util.*
 
 /**
  * Пример
@@ -48,12 +51,10 @@ fun main(args: Array<String>) {
         val seconds = timeStrToSeconds(line)
         if (seconds == -1) {
             println("Введённая строка $line не соответствует формату ЧЧ:ММ:СС")
-        }
-        else {
+        } else {
             println("Прошло секунд с начала суток: $seconds")
         }
-    }
-    else {
+    } else {
         println("Достигнут <конец файла> в процессе чтения строки. Программа прервана")
     }
 }
@@ -66,7 +67,26 @@ fun main(args: Array<String>) {
  * День и месяц всегда представлять двумя цифрами, например: 03.04.2011.
  * При неверном формате входной строки вернуть пустую строку
  */
-fun dateStrToDigit(str: String): String = TODO()
+fun dateStrToDigit(str: String): String {
+    val parts = str.split(" ")
+    val list = mutableListOf<String>("января", "февраля", "марта", "апреля", "мая", "июня", "июля",
+            "августа", "сентября", "октября", "ноября", "декабря")
+    try {
+        val ans = parts[0].toInt()
+        val ans1 = list.indexOf(parts[1]) + 1
+        val ans2 = parts[2].toInt()
+        if (ans1 == 0)
+            return ""
+        else {
+            return String.format("%02d.%02d.%d", ans, ans1, ans2)
+        }
+    } catch (ans: NumberFormatException) {
+        return ""
+    } catch (ans: IndexOutOfBoundsException) {
+        return ""
+    }
+}
+
 
 /**
  * Средняя
@@ -75,7 +95,25 @@ fun dateStrToDigit(str: String): String = TODO()
  * Перевести её в строковый формат вида "15 июля 2016".
  * При неверном формате входной строки вернуть пустую строку
  */
-fun dateDigitToStr(digital: String): String = TODO()
+fun dateDigitToStr(digital: String): String {
+    val parts = digital.split(".")
+    val list = mutableListOf<String>("января", "февраля", "марта", "апреля", "мая", "июня", "июля",
+            "августа", "сентября", "октября", "ноября", "декабря")
+    try {
+        val ans = parts[0].toInt()
+        val ans1 = list[parts[1].toInt() - 1]
+        val ans2 = parts[2].toInt()
+        if (parts.size == 3)
+            return String.format("%s %s %s", ans, ans1, ans2)
+        else
+            return ""
+
+    } catch (ans2: NumberFormatException) {
+        return ""
+    } catch (ans: IndexOutOfBoundsException) {
+        return ""
+    }
+}
 
 /**
  * Средняя

@@ -109,13 +109,9 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  */
 fun abs(v: List<Double>): Double {
     var sum = 0.0
-    if (v.isEmpty() == true)
-        return 0.0
-    else {
-        for (i in 0..v.size - 1)
-            sum += pow(v[i], 2.0)
-        return sqrt(sum)
-    }
+    for (i in 0..v.size - 1)
+        sum += pow(v[i], 2.0)
+    return sqrt(sum)
 }
 
 /**
@@ -260,7 +256,7 @@ fun convertToString(n: Int, base: Int): String {
     if (n == 0) return "0"
     else {
         for (i in 0..b.size - 1) {
-            if (b[i] > 9) d += (b[i] + c).toChar().toString()
+            if (b[i] > 9) d += (b[i] + c).toChar()
             else d += b[i]
         }
         return d
