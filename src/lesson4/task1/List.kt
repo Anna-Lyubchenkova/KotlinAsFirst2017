@@ -109,7 +109,7 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  */
 fun abs(v: List<Double>): Double {
     var sum = 0.0
-    for (i in 0..v.size - 1)
+    for (i in 0 until v.size)
         sum += pow(v[i], 2.0)
     return sqrt(sum)
 }
@@ -136,7 +136,7 @@ fun mean(list: List<Double>): Double {
  */
 fun center(list: MutableList<Double>): MutableList<Double> {
     var mid = list.sum() / list.size
-    for (i in 0..list.size - 1) {
+    for (i in 0 until list.size) {
         list[i] = list[i] - mid
     }
     return list
@@ -151,7 +151,7 @@ fun center(list: MutableList<Double>): MutableList<Double> {
  */
 fun times(a: List<Double>, b: List<Double>): Double {
     var c = 0.0
-    for (i in 0..a.size - 1)
+    for (i in 0 until a.size)
         c = c + a[i] * b[i]
     return c
 }
@@ -166,7 +166,7 @@ fun times(a: List<Double>, b: List<Double>): Double {
  */
 fun polynom(p: List<Double>, x: Double): Double {
     var pol = 0.0
-    for (i in 0..p.size - 1) {
+    for (i in 0 until p.size) {
         pol = p[i] * pow(x, i.toDouble()) + pol
     }
     return pol
@@ -184,7 +184,7 @@ fun polynom(p: List<Double>, x: Double): Double {
  */
 fun accumulate(list: MutableList<Double>): MutableList<Double> {
     var sum = 0.0
-    for (i in 0..list.size - 1) {
+    for (i in 0 until list.size) {
         sum += list[i]
         list[i] = sum
     }
@@ -255,8 +255,8 @@ fun convertToString(n: Int, base: Int): String {
     var d = ""
     if (n == 0) return "0"
     else {
-        for (i in 0..b.size - 1) {
-            if (b[i] > 9) d += (b[i] + c).toChar()
+        for (i in 0 until b.size) {
+            if (b[i] > 9) d += (b[i].toChar() + c)
             else d += b[i]
         }
         return d

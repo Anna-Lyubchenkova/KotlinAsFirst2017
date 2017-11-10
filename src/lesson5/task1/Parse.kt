@@ -69,20 +69,22 @@ fun main(args: Array<String>) {
  */
 fun dateStrToDigit(str: String): String {
     val parts = str.split(" ")
-    val list = mutableListOf<String>("января", "февраля", "марта", "апреля", "мая", "июня", "июля",
+    val list = listOf<String>("января", "февраля", "марта", "апреля", "мая", "июня", "июля",
             "августа", "сентября", "октября", "ноября", "декабря")
     try {
-        val ans = parts[0].toInt()
-        val ans1 = list.indexOf(parts[1]) + 1
-        val ans2 = parts[2].toInt()
-        if (ans1 == 0)
+        if (parts.size == 3) {
+            val ans = parts[0].toInt()
+            val ans1 = list.indexOf(parts[1]) + 1
+            val ans2 = parts[2].toInt()
+            if (ans1 == 0)
+                return ""
+            else {
+                return String.format("%02d.%02d.%d", ans, ans1, ans2)
+            }
+        } else {
             return ""
-        else {
-            return String.format("%02d.%02d.%d", ans, ans1, ans2)
         }
     } catch (ans: NumberFormatException) {
-        return ""
-    } catch (ans: IndexOutOfBoundsException) {
         return ""
     }
 }
@@ -97,20 +99,23 @@ fun dateStrToDigit(str: String): String {
  */
 fun dateDigitToStr(digital: String): String {
     val parts = digital.split(".")
-    val list = mutableListOf<String>("января", "февраля", "марта", "апреля", "мая", "июня", "июля",
+    val list = listOf<String>("января", "февраля", "марта", "апреля", "мая", "июня", "июля",
             "августа", "сентября", "октября", "ноября", "декабря")
     try {
-        val ans = parts[0].toInt()
-        val ans1 = list[parts[1].toInt() - 1]
-        val ans2 = parts[2].toInt()
-        if (parts.size == 3)
-            return String.format("%s %s %s", ans, ans1, ans2)
-        else
-            return ""
+        if (parts.size == 3) {
+            val ans = parts[0].toInt()
+            if (parts[1].toInt() <= 0) return ""
+            else {
+                val ans1 = list[parts[1].toInt() - 1]
+                val ans2 = parts[2].toInt()
+                if (ans1 == "") return ""
+                return String.format("%s %s %s", ans, ans1, ans2)
+            }
 
+        } else {
+            return ""
+        }
     } catch (ans2: NumberFormatException) {
-        return ""
-    } catch (ans: IndexOutOfBoundsException) {
         return ""
     }
 }
