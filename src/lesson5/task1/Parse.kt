@@ -2,6 +2,7 @@
 
 package lesson5.task1
 
+import lesson8.task1.transliterate
 import java.util.*
 
 /**
@@ -167,8 +168,21 @@ fun bestHighJump(jumps: String): Int = TODO()
  * Вернуть значение выражения (6 для примера).
  * Про нарушении формата входной строки бросить исключение IllegalArgumentException
  */
-fun plusMinus(expression: String): Int = TODO()
+fun plusMinus(expression: String): Int {
+    val parts = expression.split(" ")
+    var ans = parts[0].toInt()
+    val a = parts.size
+    for (i in 1 until a - 1) {
+        if (parts[i] == "+") {
+            ans += parts[i + 1].toInt()
+        }
+        if (parts[i] == "-") {
+            ans += -1 * parts[i + 1].toInt()
+        }
+    }
+    return ans
 
+}
 /**
  * Сложная
  *
