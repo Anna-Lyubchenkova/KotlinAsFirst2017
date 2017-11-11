@@ -170,23 +170,29 @@ fun bestHighJump(jumps: String): Int = TODO()
  */
 fun plusMinus(expression: String): Int {
     val parts = expression.split(" ")
-    var ans = parts[0].toInt()
-    val a = parts.size
-    var i = 1
-    while (i <= a - 2) {
-        if (parts[i] == "+") {
-            ans += parts[i + 1].toInt()
-        } else
-        if (parts[i] == "-") {
-            ans += -1 * parts[i + 1].toInt()
-        } else {
-            throw IllegalArgumentException()
+    try {
+        var ans = parts[0].toInt()
+        val a = parts.size
+        var i = 1
+        while (i <= a - 2) {
+            if (parts[i] == "+") {
+                ans += parts[i + 1].toInt()
+            } else
+                if (parts[i] == "-") {
+                    ans += -1 * parts[i + 1].toInt()
+                } else {
+                    throw IllegalArgumentException()
+                }
+            i += 2
         }
-        i += 2
+        return ans
+    } catch (ans: NumberFormatException) {
+        throw IllegalArgumentException()
     }
-    return ans
+
 
 }
+
 /**
  * Сложная
  *
