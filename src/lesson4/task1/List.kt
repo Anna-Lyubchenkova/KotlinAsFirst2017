@@ -329,7 +329,8 @@ fun russian(n: Int): String {
             ans.add(e[x4])
         } else {
             ans.add(b[x5])
-            ans.add(d[x4])
+            if (x4 != 0)
+                ans.add(d[x4])
         }
     else if (x4 != 0) ans.add(d[x4])
     if (x6 != 0 || x5 != 0 || x4 != 0) {
