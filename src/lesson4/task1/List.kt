@@ -1,4 +1,5 @@
 @file:Suppress("UNUSED_PARAMETER")
+
 package lesson4.task1
 
 import lesson1.task1.discriminant
@@ -252,14 +253,17 @@ fun convert(n: Int, base: Int): List<Int> {
 fun convertToString(n: Int, base: Int): String {
     val b = convert(n, base)
     val c = 87
-    var d = ""
+    val d = mutableListOf<String>()
     if (n == 0) return "0"
     else {
         for (i in 0 until b.size) {
-            if (b[i] > 9) d += (b[i].toChar() + c)
-            else d += b[i]
+            if (b[i] > 9) {
+                d += (b[i] + c).toChar().toString()
+            } else {
+                d += b[i].toString()
+            }
         }
-        return d
+        return d.joinToString(separator = "")
     }
 }
 

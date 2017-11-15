@@ -173,8 +173,7 @@ fun plusMinus(expression: String): Int {
     try {
         var ans = parts[0].toInt()
         val a = parts.size
-        var i = 1
-        while (i <= a - 2) {
+        for (i in 1..a - 2 step 2) {
             if (parts[i] == "+") {
                 ans += parts[i + 1].toInt()
             } else
@@ -183,7 +182,6 @@ fun plusMinus(expression: String): Int {
                 } else {
                     throw IllegalArgumentException()
                 }
-            i += 2
         }
         return ans
     } catch (ans: NumberFormatException) {
@@ -215,7 +213,35 @@ fun firstDuplicateIndex(str: String): Int = TODO()
  * или пустую строку при нарушении формата строки.
  * Все цены должны быть положительными
  */
-fun mostExpensive(description: String): String = TODO()
+fun mostExpensive(description: String): String {
+    try {
+        val parts = description.split("; ")
+        if (parts.size <= 1)
+            if (parts.size == 1) {
+                val a = parts.joinToString(separator = " ")
+                val parts2 = a.split(" ")
+                return parts2[0]
+            } else
+                return ""
+        else {
+            val a = parts.joinToString(separator = " ")
+            val parts2 = a.split(" ")
+            val s = parts2.size
+            var d = 0
+            var max = 0.0
+            for (i in 1..s - 2 step 2) {
+                if (max < parts2[i].toDouble()) {
+                    max = parts2[i].toDouble()
+                    d = i
+                }
+            }
+            return parts2[d - 1]
+
+        }
+    } catch (ans: NumberFormatException) {
+        return ""
+    }
+}
 
 /**
  * Сложная
