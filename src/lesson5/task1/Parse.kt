@@ -229,7 +229,7 @@ fun mostExpensive(description: String): String {
             val s = parts2.size
             var d = 0
             var max = 0.0
-            for (i in 1..s - 2 step 2) {
+            for (i in 1..s - 1 step 2) {
                 if (max < parts2[i].toDouble()) {
                     max = parts2[i].toDouble()
                     d = i
