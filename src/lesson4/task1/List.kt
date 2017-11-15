@@ -336,7 +336,7 @@ fun russian(n: Int): String {
     if (x6 != 0 || x5 != 0 || x4 != 0) {
         if (x4 == 1) ans.add(f[0])
         else
-            if (x4 in 1..4) ans.add(f[1])
+            if (x4 in 1..4 && x5 != 1) ans.add(f[1])
             else
                 ans.add(f[2])
     }
