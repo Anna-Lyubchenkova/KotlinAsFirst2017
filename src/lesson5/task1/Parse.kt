@@ -176,12 +176,11 @@ fun plusMinus(expression: String): Int {
         for (i in 1..a - 2 step 2) {
             if (parts[i] == "+") {
                 ans += parts[i + 1].toInt()
-            } else
-                if (parts[i] == "-") {
-                    ans += -1 * parts[i + 1].toInt()
-                } else {
-                    throw IllegalArgumentException()
-                }
+            } else if (parts[i] == "-") {
+                ans += -1 * parts[i + 1].toInt()
+            } else {
+                throw IllegalArgumentException()
+            }
         }
         return ans
     } catch (ans: NumberFormatException) {

@@ -252,13 +252,12 @@ fun convert(n: Int, base: Int): List<Int> {
  */
 fun convertToString(n: Int, base: Int): String {
     val b = convert(n, base)
-    val c = 87
     val d = mutableListOf<String>()
     if (n == 0) return "0"
     else {
         for (i in 0 until b.size) {
             if (b[i] > 9) {
-                d += (b[i] + c).toChar().toString()
+                d += ('a' + b[i] - 10).toString()
             } else {
                 d += b[i].toString()
             }
