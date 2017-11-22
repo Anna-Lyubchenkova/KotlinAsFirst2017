@@ -160,13 +160,14 @@ class Line private constructor(val b: Double, val angle: Double) {
      * Для этого необходимо составить и решить систему из двух уравнений (каждое для своей прямой)
      */
     fun crossPoint(other: Line): Point {
-        sin(angle) / cos(angle) + b / cos(angle)
         return when {
             angle == PI / 2 -> Point(-b, -b * tan(other.angle) + other.b / cos(other.angle))
             other.angle == PI / 2 -> Point(-other.b, -other.b * tan(angle) + other.b / cos(angle))
-            else -> Point((other.b / cos(other.angle) - b / cos(angle)) / (tan(angle)
-                    - tan(other.angle)), (other.b / cos(other.angle) - b / cos(angle)) /
-                    (tan(angle) - tan(other.angle)) * tan(angle) + b / cos(angle))
+            else -> {
+                val x = (other.b / cos(other.angle) - b / cos(angle)) / (tan(angle) - tan(other.angle))
+                val y = x * tan(angle) + b / cos(angle)
+                Point(x, y)
+            }
         }
     }
 
@@ -238,7 +239,7 @@ fun circleByThreePoints(a: Point, b: Point, c: Point): Circle {
     val AB = bisectorByPoints(a, b)
     val BC = bisectorByPoints(b, c)
     val center = AB.crossPoint(BC)
-    val radius = center.distance(a)
+    val radius = center.distance(c)
     return Circle(center, radius)
 }
 
