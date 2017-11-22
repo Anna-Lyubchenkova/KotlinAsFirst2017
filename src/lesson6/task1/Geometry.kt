@@ -165,7 +165,7 @@ class Line private constructor(val b: Double, val angle: Double) {
             other.angle == PI / 2 -> Point(-other.b, -other.b * tan(angle) + other.b / cos(angle))
             else -> {
                 val x = (other.b / cos(other.angle) - b / cos(angle)) / (tan(angle) - tan(other.angle))
-                val y = x * tan(angle) + b / cos(angle)
+                val y = (x * sin(angle) + b) / cos(angle)
                 Point(x, y)
             }
         }
@@ -236,8 +236,8 @@ fun findNearestCirclePair(vararg circles: Circle): Pair<Circle, Circle> = TODO()
  * построить окружность, описанную вокруг треугольника - эквивалентная задача).
  */
 fun circleByThreePoints(a: Point, b: Point, c: Point): Circle {
-    val AB = bisectorByPoints(b, a)
-    val BC = bisectorByPoints(a, c)
+    val AB = bisectorByPoints(a, b)
+    val BC = bisectorByPoints(b, c)
     val center = AB.crossPoint(BC)
     val radius = center.distance(a)
     return Circle(center, radius)
