@@ -190,7 +190,7 @@ fun lineBySegment(s: Segment): Line {
     var arctg = atan2((s.end.y - s.begin.y), (s.end.x - s.begin.x))
     if (arctg < 0)
         arctg += PI
-    if (arctg > PI)
+    if (arctg >= PI)
         arctg -= PI
     return Line(s.begin, arctg)
 }
@@ -235,8 +235,8 @@ fun findNearestCirclePair(vararg circles: Circle): Pair<Circle, Circle> = TODO()
  * построить окружность, описанную вокруг треугольника - эквивалентная задача).
  */
 fun circleByThreePoints(a: Point, b: Point, c: Point): Circle {
-    val AB = bisectorByPoints(a, b)
-    val BC = bisectorByPoints(b, c)
+    val AB = bisectorByPoints(b, c)
+    val BC = bisectorByPoints(a, c)
     val center = AB.crossPoint(BC)
     val radius = center.distance(a)
     return Circle(center, radius)
