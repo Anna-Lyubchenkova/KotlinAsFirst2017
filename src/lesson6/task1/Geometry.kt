@@ -152,7 +152,6 @@ class Line private constructor(val b: Double, val angle: Double) {
     }
 
     constructor(point: Point, angle: Double) : this(point.y * Math.cos(angle) - point.x * Math.sin(angle), angle)
-
     /**
      * Средняя
      *
@@ -170,7 +169,6 @@ class Line private constructor(val b: Double, val angle: Double) {
             }
         }
     }
-
     override fun equals(other: Any?) = other is Line && angle == other.angle && b == other.b
 
     override fun hashCode(): Int {
@@ -182,6 +180,7 @@ class Line private constructor(val b: Double, val angle: Double) {
     override fun toString() = "Line(${Math.cos(angle)} * y = ${Math.sin(angle)} * x + $b)"
 }
 
+
 /**
  * Средняя
  *
@@ -189,12 +188,19 @@ class Line private constructor(val b: Double, val angle: Double) {
  */
 fun lineBySegment(s: Segment): Line {
     var arctg = atan2((s.end.y - s.begin.y), (s.end.x - s.begin.x))
-    if (arctg < 0)
-        arctg += PI
-    if (arctg >= PI)
-        arctg -= PI
-    return Line(s.begin, arctg)
+    return Line(s.begin, checkAngle(arctg))
 }
+
+fun checkAngle(k: Double): Double {
+    var angle = k
+    if (angle < 0)
+        angle += PI
+    if (angle >= PI)
+        angle -= PI
+    return angle
+
+}
+
 
 /**
  * Средняя
@@ -203,6 +209,7 @@ fun lineBySegment(s: Segment): Line {
  */
 fun lineByPoints(a: Point, b: Point): Line = lineBySegment(Segment(a, b))
 
+
 /**
  * Сложная
  *
@@ -210,12 +217,8 @@ fun lineByPoints(a: Point, b: Point): Line = lineBySegment(Segment(a, b))
  */
 fun bisectorByPoints(a: Point, b: Point): Line {
     val mid = Point((a.x + b.x) / 2, (a.y + b.y) / 2)
-    var k = lineByPoints(a, b).angle
-    if (k + PI / 2 >= PI)
-        k -= PI / 2
-    else
-        k += PI / 2
-    return Line(mid, k)
+    var k = PI / 2 + lineByPoints(a, b).angle
+    return Line(mid, checkAngle(k))
 }
 
 /**
