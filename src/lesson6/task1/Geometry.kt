@@ -164,7 +164,7 @@ class Line private constructor(val b: Double, val angle: Double) {
         val y: Double
         if (angle in PI / 4..3 * PI / 4) {
             y = (b * sin(other.angle) - other.b * sin(angle)) / (sin(other.angle) * cos(angle) - sin(angle) * cos(other.angle))
-            x = (y / tan(angle) - b / sin(angle))
+            x = (y * cos(angle) - b) / sin(angle)
         } else {
             x = (other.b * cos(angle) - b / cos(other.angle)) / (cos(other.angle) * sin(angle) - cos(angle) * sin(other.angle))
             y = (x * sin(angle) + b) / cos(angle)
