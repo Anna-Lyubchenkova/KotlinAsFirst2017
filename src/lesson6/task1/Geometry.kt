@@ -152,6 +152,7 @@ class Line private constructor(val b: Double, val angle: Double) {
     }
 
     constructor(point: Point, angle: Double) : this(point.y * Math.cos(angle) - point.x * Math.sin(angle), angle)
+
     /**
      * Средняя
      *
@@ -159,16 +160,18 @@ class Line private constructor(val b: Double, val angle: Double) {
      * Для этого необходимо составить и решить систему из двух уравнений (каждое для своей прямой)
      */
     fun crossPoint(other: Line): Point {
-        return when {
-            angle == PI / 2 -> Point(-b, -b * sin(other.angle) / cos(other.angle) + other.b / cos(other.angle))
-            other.angle == PI / 2 -> Point(-other.b, -other.b * sin(angle) / cos(angle) + b / cos(angle))
-            else -> {
-                val x = (other.b / cos(other.angle) - b / cos(angle)) / (tan(angle) - sin(other.angle) / cos(other.angle))
-                val y = (x * sin(angle) + b) / cos(angle)
-                Point(x, y)
-            }
+        val x: Double
+        val y: Double
+        if (angle >= PI / 4 && angle <= 3 * PI / 4) {
+            y = (b * sin(other.angle) - other.b * sin(angle)) / (sin(other.angle) * cos(angle) - sin(angle) * cos(other.angle))
+            x = (y / tan(angle) - b / sin(angle))
+        } else {
+            x = (other.b * cos(angle) - b / cos(other.angle)) / (cos(other.angle) * sin(angle) - cos(angle) * sin(other.angle))
+            y = (x * sin(angle) + b) / cos(angle)
         }
+        return Point(x, y)
     }
+
     override fun equals(other: Any?) = other is Line && angle == other.angle && b == other.b
 
     override fun hashCode(): Int {
@@ -187,7 +190,7 @@ class Line private constructor(val b: Double, val angle: Double) {
  * Построить прямую по отрезку
  */
 fun lineBySegment(s: Segment): Line {
-    var arctg = atan2((s.end.y - s.begin.y), (s.end.x - s.begin.x))
+    val arctg = atan2((s.end.y - s.begin.y), (s.end.x - s.begin.x))
     return Line(s.begin, checkAngle(arctg))
 }
 
@@ -217,7 +220,7 @@ fun lineByPoints(a: Point, b: Point): Line = lineBySegment(Segment(a, b))
  */
 fun bisectorByPoints(a: Point, b: Point): Line {
     val mid = Point((a.x + b.x) / 2, (a.y + b.y) / 2)
-    var k = PI / 2 + lineByPoints(a, b).angle
+    val k = PI / 2 + lineByPoints(a, b).angle
     return Line(mid, checkAngle(k))
 }
 
