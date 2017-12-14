@@ -69,7 +69,7 @@ class MatrixImpl<E>(override val height: Int, override val width: Int, e: E) : M
     }
 
     override fun set(cell: Cell, value: E) {
-        list[width * cell.row + cell.column]
+        list[width * cell.row + cell.column] = value
     }
 
     override fun equals(other: Any?): Boolean {
