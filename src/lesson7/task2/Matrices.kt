@@ -1,4 +1,5 @@
 @file:Suppress("UNUSED_PARAMETER")
+
 package lesson7.task2
 
 import lesson7.task1.Matrix
@@ -59,7 +60,32 @@ operator fun Matrix<Int>.plus(other: Matrix<Int>): Matrix<Int> {
  * 10 11 12  5
  *  9  8  7  6
  */
-fun generateSpiral(height: Int, width: Int): Matrix<Int> = TODO()
+fun generateSpiral(height: Int, width: Int): Matrix<Int> {
+    val e = height * width
+    val res = createMatrix(height, width, e)
+    var d = 0
+    var k = 1
+    while (k <= e) {
+        for (i in d until width - d)
+            if (k <= e)
+                res[d, i] = k++
+            else break
+        for (j in d + 1 until height - d)
+            if (k <= e)
+                res[j, width - 1 - d] = k++
+            else break
+        for (p in width - 2 - d downTo d)
+            if (k <= e)
+                res[height - 1 - d, p] = k++
+            else break
+        for (l in height - 2 - d downTo d + 1)
+            if (k <= e)
+                res[l, d] = k++
+            else break
+        d++
+    }
+    return res
+}
 
 /**
  * Сложная
@@ -75,7 +101,34 @@ fun generateSpiral(height: Int, width: Int): Matrix<Int> = TODO()
  *  1  2  2  2  2  1
  *  1  1  1  1  1  1
  */
-fun generateRectangles(height: Int, width: Int): Matrix<Int> = TODO()
+fun generateRectangles(height: Int, width: Int): Matrix<Int> {
+    val e = height * width
+    val res = createMatrix(height, width, e)
+    var d = 0
+    var k = 1
+    while (d < e) {
+        for (i in k..height - k) {
+            res[i, width - k] = k
+            d++
+        }
+        for (j in k - 1..width - k) {
+            res[k - 1, j] = k
+            d++
+        }
+
+        for (p in height - 1 - k downTo k) {
+            res[p, k - 1] = k
+            d++
+        }
+
+        for (l in width - 1 - k downTo k - 1) {
+            res[height - k, l] = k
+            d++
+        }
+        k++
+    }
+    return res
+}
 
 /**
  * Сложная
@@ -103,7 +156,14 @@ fun generateSnake(height: Int, width: Int): Matrix<Int> = TODO()
  * 4 5 6      8 5 2
  * 7 8 9      9 6 3
  */
-fun <E> rotate(matrix: Matrix<E>): Matrix<E> = TODO()
+fun <E> rotate(matrix: Matrix<E>): Matrix<E> {
+    val res = createMatrix(matrix.height, matrix.width, matrix[0, 0])
+    for (i in 0 until matrix.width)
+        for (j in 0 until matrix.height)
+            res[i, j] = matrix[matrix.width - j - 1, i]
+    if (matrix.height != matrix.width) throw IllegalArgumentException()
+    return res
+}
 
 /**
  * Сложная
